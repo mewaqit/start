@@ -179,7 +179,7 @@ Route::get("/contact",[SecondController::class, 'contact']);
 
 Route::get("/channels",[ChannelController::class, 'list']);
 
-Route::get("/postsT", [PostController::class, 'options']);
+Route::get("/posts", [PostController::class, 'options']);
 
 // ROUTE & CONTROLLERS & Views END
 
