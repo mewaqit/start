@@ -11,6 +11,6 @@ class project extends Model
 
     public function employees()
     {
-        return $this->belongsTo(employee::class,'emp_id');
+        return $this->belongsTo(employee::class,'emp_id','emp_id');
     }
 }

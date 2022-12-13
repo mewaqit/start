@@ -12,6 +12,6 @@ class employee extends Model
 
     public function projects()
     {
-        return $this->hasMany(project::class, 'emp_id');
+        return $this->hasMany(project::class, 'emp_id', 'emp_id');
     }
 }

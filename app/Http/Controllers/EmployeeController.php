@@ -20,12 +20,16 @@ class EmployeeController extends Controller
 
     public function show_projects()
     {
-//        $employees = employee::find(1)->projects;
-//        $employees = employee::with('projects')->get();
-        $employees = project::with('employees')->get();
+//      $employees = employee::find(1)->projects;
+//      $employees = employee::has('projects')->get();
+//      dd($employees);
+        $employees = employee::with('projects')->get();
         foreach ($employees as $employee)
         {
-            echo " <br />ID: ".$employee->emp_id ." <br />NAME: ". $employee->emp_name ." <br />Project: ". $employee->prj_title . " <br />";
+            foreach ($employee->projects as $project)
+            {
+                echo " <br />EID: ".$employee->emp_id . " &nbsp;&nbsp;&nbsp; PID: ".($project->prj_id ?? '');
+            }
         }
     }
 }
