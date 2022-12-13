@@ -22,8 +22,7 @@ class EmployeeController extends Controller
     {
 //        $employees = employee::find(1)->projects;
 //        $employees = employee::with('projects')->get();
-//        $employees = project::with('employees')->get();
-        $employees = employee::with(['employees','projects'])->get();
+        $employees = project::with('employees')->get();
         foreach ($employees as $employee)
         {
             echo " <br />ID: ".$employee->emp_id ." <br />NAME: ". $employee->emp_name ." <br />Project: ". $employee->prj_title . " <br />";
