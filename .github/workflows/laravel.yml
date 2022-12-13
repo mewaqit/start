@@ -2,7 +2,7 @@ name: 🚀 Deploy to stg.elementalrm.com
 
 on:
   push:
-    branches: [ "staging" ]
+    branches: [ "main" ]
 
 jobs:
   deployment:
