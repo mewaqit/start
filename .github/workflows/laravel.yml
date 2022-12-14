@@ -29,7 +29,6 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         script: |
           cd start.xufire.com
-          npm install
 
   slack-notification:
     needs: deployment
