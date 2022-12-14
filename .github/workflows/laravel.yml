@@ -29,6 +29,7 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         script: |
           cd start.xufire.com
+          composer update
 
   slack-notification:
     needs: deployment
