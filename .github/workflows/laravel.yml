@@ -1,4 +1,4 @@
-name: 🚀 Deploy to stg.elementalrm.com
+name: 🚀 Deploy to stg.XUFIRE.com
 
 on:
   push:
