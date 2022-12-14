@@ -1,0 +1,47 @@
+name: 🚀 Deploy to stg.elementalrm.com
+
+on:
+  push:
+    branches: [ "staging" ]
+
+jobs:
+  deployment:
+    name: 🎉 Deploy
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2
+
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.3.0
+      with:
+        server: ${{ secrets.FTP_STG_SERVER }}
+        username: ${{ secrets.FTP_STG_USERNAME }}
+        password: ${{ secrets.FTP_STG_PASSWORD }}
+    - name: ➡️ Run Migration
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        port: ${{ secrets.SSH_PORT }}
+        script: |
+          php artisan migrate --force
+
+  slack-notification:
+    needs: deployment
+    name: Slack Notification
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Git-Auto-Deployment
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_CHANNEL: deployments
+        SLACK_COLOR: ${{ job.status }}
+        SLACK_ICON: https://xufire.com/small_xufire.com.png
+        SLACK_TITLE: Testing | Staging Deployment
+        SLACK_USERNAME: Git Auto Deployment
+        SLACK_WEBHOOK: ${{ secrets.SLACK_DEPLOYMENTS_CHANNEL_WEBHOOK_URL }}
