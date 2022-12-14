@@ -29,7 +29,7 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         script: |
           cd start.xufire.com
-          composer install
+          npm install
 
   slack-notification:
     needs: deployment
