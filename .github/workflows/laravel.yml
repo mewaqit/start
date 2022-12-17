@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - name: 🚚 Get latest code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
@@ -20,6 +20,7 @@ jobs:
         server: ${{ secrets.FTP_STG_SERVER }}
         username: ${{ secrets.FTP_STG_USERNAME }}
         password: ${{ secrets.FTP_STG_PASSWORD }}
+        
     - name: ➡️ Run Migration
       uses: appleboy/ssh-action@master
       with:
@@ -29,8 +30,8 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         script: |
           pwd
-          cd start.xufire.com
-          pwd 
+          cd start.xufire.com/
+          pwd
           composer update
 
   slack-notification:
@@ -38,7 +39,7 @@ jobs:
     name: Slack Notification
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Git-Auto-Deployment
       uses: rtCamp/action-slack-notify@v2
       env:
