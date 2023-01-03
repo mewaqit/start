@@ -29,10 +29,7 @@ jobs:
         password: ${{ secrets.SSH_PASSWORD }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          pwd
-          cd start.xufire.com/
-          pwd
-          composer update
+          sh run-composer.sh
 
   slack-notification:
     needs: deployment
