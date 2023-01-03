@@ -32,7 +32,7 @@ jobs:
           pwd
           cd start.xufire.com/
           pwd
-          composer update
+          ~/.composer/composer update
 
   slack-notification:
     needs: deployment
